@@ -1,12 +1,13 @@
 package com.example.dwaekrany;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SummaryActivity extends AppCompatActivity {
-
+    public static final String EXTRA_NUMBER =
+            "com.example.dwaekrany.NUMBER";
     public static final String EXTRA_NAME = "extra_name";
     public static final String EXTRA_EMAIL = "extra_email";
     public static final String EXTRA_COURSE = "extra_course";
@@ -40,5 +41,17 @@ public class SummaryActivity extends AppCompatActivity {
 
         TextView tvSummary = findViewById(R.id.tvSummary);
         tvSummary.setText(summary);
+        findViewById(R.id.btnConfirm).setOnClickListener(v -> confirm());
+        findViewById(R.id.btnEdit).setOnClickListener(v -> finish());
+
+    }
+    private void confirm() {
+        String number = "ZG/" + (1000 + new java.util.Random().nextInt(9000));
+
+        Intent result = new Intent();
+        result.putExtra(EXTRA_NUMBER, number);
+
+        setResult(RESULT_OK, result);
+        finish();
     }
 }

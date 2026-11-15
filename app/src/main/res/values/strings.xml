@@ -18,5 +18,8 @@
         <item>Aplikacje mobilne</item>
         <item>Bazy danych</item>
     </string-array>
+    <string name="btn_edit">POPRAW DANE</string>
+    <string name="btn_confirm">POTWIERDŹ</string>
+    <string name="registered">Zgłoszenie przyjęte! Numer: %1$s</string>
 
 </resources>

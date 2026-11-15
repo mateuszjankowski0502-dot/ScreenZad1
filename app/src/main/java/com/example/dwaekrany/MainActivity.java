@@ -9,11 +9,32 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+    private final ActivityResultLauncher<Intent> summaryLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == RESULT_OK
+                                && result.getData() != null) {
 
+                            String number = result.getData()
+                                    .getStringExtra(SummaryActivity.EXTRA_NUMBER);
+
+                            Toast.makeText(
+                                    this,
+                                    getString(R.string.registered, number),
+                                    Toast.LENGTH_LONG
+                            ).show();
+                        }
+                        // RESULT_CANCELED: użytkownik zrezygnował lub nacisnął Wstecz.
+                    }
+            );
     private EditText etName;
     private EditText etEmail;
     private Spinner spCourse;
@@ -84,6 +105,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(SummaryActivity.EXTRA_LEVEL, level);
         intent.putExtra(SummaryActivity.EXTRA_NEWSLETTER, newsletter);
 
-        startActivity(intent);
-    }
+        summaryLauncher.launch(intent);    }
 }
