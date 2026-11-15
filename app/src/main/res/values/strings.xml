@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">Dwa Ekrany</string>
+
+    <string name="header_form">Zapisy na kurs</string>
+    <string name="header_summary">Sprawdź dane</string>
+    <string name="first_screen_description">Witaj w formularzu zapisów na kurs. Kliknij DALEJ, aby przejść do podsumowania.</string>
+    <string name="btn_next">DALEJ</string>
+    <string name="summary_placeholder">Tutaj pojawi się podsumowanie.</string>
+
+</resources>
