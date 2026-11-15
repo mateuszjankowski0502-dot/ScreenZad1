@@ -21,5 +21,6 @@
     <string name="btn_edit">POPRAW DANE</string>
     <string name="btn_confirm">POTWIERDŹ</string>
     <string name="registered">Zgłoszenie przyjęte! Numer: %1$s</string>
+    <string name="btn_share">UDOSTĘPNIJ PODSUMOWANIE</string>
 
 </resources>
