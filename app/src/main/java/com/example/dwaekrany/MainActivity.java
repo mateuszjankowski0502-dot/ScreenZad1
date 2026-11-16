@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG
                             ).show();
                         }
-                        // RESULT_CANCELED: użytkownik zrezygnował lub nacisnął Wstecz.
                     }
             );
     private EditText etName;
