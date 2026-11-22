@@ -1,5 +1,7 @@
 package com.example.dwaekrany;
-
+import android.view.Menu;
+import android.view.MenuItem;
+import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -40,11 +42,65 @@ public class MainActivity extends AppCompatActivity {
     private SeekBar sbLevel;
     private TextView tvLevelValue;
     private CheckBox cbNewsletter;
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.menu_clear) {
+            etName.setText("");
+            etEmail.setText("");
+            spCourse.setSelection(0);
+            sbLevel.setProgress(0);
+            cbNewsletter.setChecked(false);
+
+            Toast.makeText(
+                    this,
+                    "Formularz został wyczyszczony",
+                    Toast.LENGTH_SHORT
+            ).show();
+
+            return true;
+
+        } else if (id == R.id.menu_share) {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "Formularz rejestracji kursanta"
+            );
+
+            startActivity(Intent.createChooser(
+                    shareIntent,
+                    "Udostępnij"
+            ));
+
+            return true;
+
+        } else if (id == R.id.menu_about) {
+            Intent intent = new Intent(this, AboutActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Rejestracja kursanta");
+        }
 
         etName = findViewById(R.id.etName);
         etEmail = findViewById(R.id.etEmail);

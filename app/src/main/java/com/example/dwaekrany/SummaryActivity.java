@@ -1,3 +1,4 @@
+
 package com.example.dwaekrany;
 
 import android.content.Intent;
@@ -6,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 public class SummaryActivity extends AppCompatActivity {
 
@@ -34,6 +36,9 @@ public class SummaryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summary);
 
+        Toolbar toolbar = findViewById(R.id.toolbarSummary);
+        setSupportActionBar(toolbar);
+
         TextView tvSummary = findViewById(R.id.tvSummary);
         Button btnEdit = findViewById(R.id.btnEdit);
         Button btnConfirm = findViewById(R.id.btnConfirm);
@@ -47,6 +52,15 @@ public class SummaryActivity extends AppCompatActivity {
         int level = receivedIntent.getIntExtra(EXTRA_LEVEL, 0);
         boolean newsletter =
                 receivedIntent.getBooleanExtra(EXTRA_NEWSLETTER, false);
+
+        if (name == null || name.trim().isEmpty()) {
+            name = "kursanta";
+        }
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setTitle("Podsumowanie: " + name);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         String newsletterText = getString(
                 newsletter ? R.string.yes_short : R.string.no_short
@@ -70,6 +84,12 @@ public class SummaryActivity extends AppCompatActivity {
         btnShare.setOnClickListener(v -> shareSummary());
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
+    }
+
     private void confirm() {
         String number = "ZG/" +
                 (1000 + new java.util.Random().nextInt(9000));
@@ -83,13 +103,8 @@ public class SummaryActivity extends AppCompatActivity {
 
     private void shareSummary() {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
-
         shareIntent.setType("text/plain");
-
-        shareIntent.putExtra(
-                Intent.EXTRA_TEXT,
-                summaryText
-        );
+        shareIntent.putExtra(Intent.EXTRA_TEXT, summaryText);
 
         Intent chooser = Intent.createChooser(
                 shareIntent,
