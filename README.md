@@ -81,3 +81,4 @@ Naciśnięcie przycisku Wstecz zamyka drugą aktywność. Pierwsza aktywność o
 
 \- XML
 
+# MenuZad2
